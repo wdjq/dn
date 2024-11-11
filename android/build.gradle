@@ -1,3 +1,4 @@
+// 设置所有项目的仓库
 allprojects {
     repositories {
         google()
@@ -6,14 +7,39 @@ allprojects {
     }
 }
 
+// 设置根项目的构建目录
 rootProject.buildDir = '../build'
+
+// 设置子项目的构建目录
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+
+// 确保所有子项目在评估时依赖于 ':app' 项目
 subprojects {
     project.evaluationDependsOn(':app')
 }
 
+// 注册一个清理任务，用于删除构建目录
 tasks.register("clean", Delete) {
     delete rootProject.buildDir
+}
+
+// 设置依赖项解析管理
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+// 在 android 闭包内部添加一个 preBuild 任务
+preBuild.dependsOn 'gitSubmodule'
+task gitSubmodule {
+    doLast {
+        exec {
+            commandLine 'git', 'submodule', 'update', '--init', '--recursive'
+        }
+    }
 }
