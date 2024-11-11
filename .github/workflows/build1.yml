@@ -81,14 +81,11 @@ jobs:
         flutter pub get
 
 
-    # - name: Build APK  # 构建 APK
-      # run: |
-        # flutter clean
-        # flutter build apk --target-platform android-arm64 --split-per-abi --obfuscate --split-debug-info=tiny_computer/sdi
-
-    - name: Build APK with stacktrace  # 构建 APK测试
+    - name: Build APK  # 构建 APK
       run: |
-        flutter build apk --target - platform android - arm64 --split - per - abi --obfuscate --split - debug - info=tiny_computer/sdi --verbose
+        flutter clean
+        flutter build apk --target-platform android-arm64 --split-per-abi --obfuscate --split-debug-info=tiny_computer/sdi
+
 
     - name: Upload APK as artifact  # 上传 APK 作为构建产物
       uses: actions/upload-artifact@v3
