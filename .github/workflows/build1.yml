@@ -19,7 +19,7 @@ jobs:
         echo "Starting submodule initialization..."
         git submodule sync --recursive
         git submodule update --init --recursive --force
-        if [! -d "android/extern/libjpeg-turbo" ]; then
+        if [[ ! -d "android/extern/libjpeg-turbo" ]]; then
           echo "libjpeg-turbo submodule not found. Attempting manual clone..."
           git clone https://github.com/libjpeg-turbo/libjpeg-turbo.git android/extern/libjpeg-turbo
           if [ $? -eq 0 ]; then
@@ -32,6 +32,8 @@ jobs:
           echo "libjpeg-turbo submodule already initialized."
         fi
         echo "Submodule initialization completed."
+      shell: /usr/bin/bash -e {0}
+
 
     - name: Set up Java
       uses: actions/setup-java@v3
