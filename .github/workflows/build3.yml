@@ -1,0 +1,19 @@
+name: Build 3
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  update-submodules:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'  # 确保子模块也被检出
+
+    - name: Initialize and update submodules
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --recursive --force
