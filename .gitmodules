@@ -72,3 +72,6 @@
 	path = android/app/src/main/cpp/OpenXR-SDK
 	url = https://github.com/KhronosGroup/OpenXR-SDK.git
 	ignore = dirty
+[submodule "android/extern/libjpeg-turbo"]
+	path = android/extern/libjpeg-turbo
+	url = https://github.com/wdjq/libjpeg-turbo.git
