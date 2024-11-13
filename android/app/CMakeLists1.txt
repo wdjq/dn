@@ -31,21 +31,14 @@ avnc_check_submodule(libjpeg-turbo)
 set(AVNC_LIBJPEG_SRC_DIR ${AVNC_EXTERN_DIR}/libjpeg-turbo)
 set(AVNC_LIBJPEG_BUILD_DIR ${CMAKE_BINARY_DIR}/libjpeg-turbo)
 
-include(ExternalProject)
-ExternalProject_Add(
-  libjpeg-turbo
-  PREFIX ${AVNC_LIBJPEG_BUILD_DIR}
-  GIT_REPOSITORY https://github.com/libjpeg-turbo/libjpeg-turbo.git
-  GIT_TAG 3.0.91 # 请替换为您需要的版本标签
-  UPDATE_COMMAND ""
-  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${AVNC_LIBJPEG_BUILD_DIR}/install -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-  BUILD_COMMAND ""
-  INSTALL_COMMAND ""
-)
+add_subdirectory(${AVNC_LIBJPEG_SRC_DIR} ${AVNC_LIBJPEG_BUILD_DIR})
 
-set(JPEG_LIBRARY ${AVNC_LIBJPEG_BUILD_DIR}/install/lib/libturbojpeg.a)
+# Set these variables so FindJPEG can find the library
+set(JPEG_LIBRARY ${AVNC_LIBJPEG_BUILD_DIR}/libturbojpeg.a)
+
+# Create an interface library to manage include directories
 add_library(libjpeg INTERFACE)
-target_include_directories(libjpeg INTERFACE ${AVNC_LIBJPEG_BUILD_DIR}/install/include)
+target_include_directories(libjpeg INTERFACE ${AVNC_LIBJPEG_SRC_DIR})
 
 ###############################################################################
 # SSL
