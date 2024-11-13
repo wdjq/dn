@@ -40,7 +40,7 @@ jobs:
     - name: Modify wolfssl CMakeLists.txt
       run: |
         # 导航到 wolfssl 目录
-        cd ${{ github.workspace }}/extern/wolfssl
+        cd ${{ github.workspace }}/android/extern/wolfssl
         
         # 创建备份的 CMakeLists.txt 文件
         cp CMakeLists.txt CMakeLists.txt.backup
