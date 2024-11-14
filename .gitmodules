@@ -75,3 +75,6 @@
 [submodule "new-name"]
 	path = android/extern/libjpeg-turbo
 	url = https://github.com/wdjq/libjpeg-turbo.git
+[submodule "android/extern/android/extern/libjpeg-turbo"]
+	path = android/extern/android/extern/libjpeg-turbo
+	url = https://github.com/libjpeg-turbo/libjpeg-turbo.git
